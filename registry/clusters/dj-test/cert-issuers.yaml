@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     path: registry/clusters/dj-test/cert-issuers
-    repoURL: https://github.com/jarededwards/gitops
+    repoURL: https://github.com/jarededwards/dj-gitops
     targetRevision: HEAD
   syncPolicy:
     automated:
