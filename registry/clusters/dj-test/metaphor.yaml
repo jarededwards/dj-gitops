@@ -16,8 +16,8 @@ spec:
     helm:
       values: |-
         externalSecretEnabled: false
-        # image:
-          # repository: ghcr.io/konstructio/metaphor
+        image:
+          repository: ghcr.io/konstructio/metaphor
         imagePullSecrets: 
           - name: docker-config
         ingress:
