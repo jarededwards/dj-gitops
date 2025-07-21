@@ -16,9 +16,9 @@ spec:
     helm:
       values: |-
         externalSecretEnabled: false
-        image:
-          repository: ghcr.io/konstructio/zippy # repo you're pushing to
-        imagePullSecrets: # github token auth to ghcr.io
+        # image:
+          # repository: ghcr.io/konstructio/metaphor
+        imagePullSecrets: 
           - name: docker-config
         ingress:
           className: nginx
@@ -27,14 +27,14 @@ spec:
             nginx.ingress.kubernetes.io/service-upstream: "true"
             cert-manager.io/cluster-issuer: letsencrypt-prod
           hosts:
-            - host: zippy-development.gitops.ing
+            - host: metaphor-development.gitops.ing
               paths:
                 - path: /
                   pathType: Prefix
           tls:
-            - secretName: zippy-tls
+            - secretName: metaphor-tls
               hosts:
-                - zippy-development.gitops.ing
+                - metaphor-development.gitops.ing
   destination:
     name: in-cluster
     namespace: development
