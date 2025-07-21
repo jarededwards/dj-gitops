@@ -15,6 +15,7 @@ spec:
     targetRevision: 0.20.0
     helm:
       values: |-
+        externalSecretEnabled: false
         image:
           repository: ghcr.io/konstructio/zippy # repo you're pushing to
         imagePullSecrets: # github token auth to ghcr.io
