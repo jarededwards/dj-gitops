@@ -1,46 +1,46 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: development-metaphor
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-  annotations:
-    argocd.argoproj.io/sync-wave: '20'
-spec:
-  project: default
-  source:
-    repoURL: https://charts.konstruct.io # likley github container registry oci url
-    chart: metaphor # your app
-    targetRevision: 0.20.0
-    helm:
-      values: |-
-        externalSecretEnabled: false
-        image:
-          repository: ghcr.io/konstructio/metaphor
-        imagePullSecrets: 
-          - name: docker-config
-        ingress:
-          className: nginx
-          enabled: true
-          annotations:
-            nginx.ingress.kubernetes.io/service-upstream: "true"
-            cert-manager.io/cluster-issuer: letsencrypt-prod
-          hosts:
-            - host: metaphor-development.gitops.ing
-              paths:
-                - path: /
-                  pathType: Prefix
-          tls:
-            - secretName: metaphor-tls
-              hosts:
-                - metaphor-development.gitops.ing
-  destination:
-    name: in-cluster
-    namespace: development
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: development-metaphor
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+#   annotations:
+#     argocd.argoproj.io/sync-wave: '20'
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://charts.konstruct.io # likley github container registry oci url
+#     chart: metaphor # your app
+#     targetRevision: 0.20.0
+#     helm:
+#       values: |-
+#         externalSecretEnabled: false
+#         image:
+#           repository: ghcr.io/konstructio/metaphor
+#         imagePullSecrets: 
+#           - name: docker-config
+#         ingress:
+#           className: nginx
+#           enabled: true
+#           annotations:
+#             nginx.ingress.kubernetes.io/service-upstream: "true"
+#             cert-manager.io/cluster-issuer: letsencrypt-prod
+#           hosts:
+#             - host: metaphor-development.gitops.ing
+#               paths:
+#                 - path: /
+#                   pathType: Prefix
+#           tls:
+#             - secretName: metaphor-tls
+#               hosts:
+#                 - metaphor-development.gitops.ing
+#   destination:
+#     name: in-cluster
+#     namespace: development
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
