@@ -1,0 +1,21 @@
+        - --godaddy-api-key=$(GODADDY_API_KEY)
+        - --godaddy-api-secret=$(GODADDY_API_SECRET)
+        env:
+        - name: GODADDY_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: godaddy-credentials
+              key: api-key
+        - name: GODADDY_API_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: godaddy-credentials
+              key: api-secret
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: godaddy-credentials
+stringData:
+  api-key: "your-api-key"
+  api-secret: "your-api-secret"
